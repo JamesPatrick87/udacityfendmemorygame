@@ -71,6 +71,10 @@ h1 {
     box-shadow: 5px 2px 20px 0 rgba(46, 61, 73, 0.5);;
 }
 
+.deck .card i {
+    font-size: 105px;
+}
+
 .deck .card.open {
     transform: rotateY() !important;
     background: #ffffff;
@@ -180,6 +184,12 @@ h1 {
       min-height: 470px;
       padding: 15px;
     }
+    .deck .card i{
+        font-size: 75px;
+    }
+    h1 {
+        font-size: 25px;
+    }
 }
   
 @media only screen and (max-width: 470px){
@@ -188,11 +198,13 @@ h1 {
       height: 60px;
       line-height: 50px;
     }
-  
     .deck {
       width: 300px;
       min-height: 300px;
       padding: 10px;
+    }
+    .deck .card i {
+        font-size: 45px;
     }
     h1 {
       font-size: 20px;
