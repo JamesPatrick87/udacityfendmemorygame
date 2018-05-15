@@ -29,7 +29,7 @@ let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'an
     low = 20;
 
 /*Starts timer on window load and formats time*/
-let startTimer = window.onload = function() {
+let startTimer = function() {
     setInterval(function() {
         if (letsStop !== 1) {
             sec++;
@@ -54,15 +54,17 @@ let startTimer = window.onload = function() {
 
 };
 
-/*Resets clock when called*/
+/*Makes the startTimer function not run until a card is clicked*/
+$(".deck").one("click", function(){  
+    startTimer(); 
+});
+
+/*Resets Page*/
 function resetTimer() {
-    clearInterval(clearTime);
-    sec = 0;
-    min = 0;
-    $(".timer").text("0:00");
+    window.location.reload(true);
 };
 
-
+/*Shuffle function from http://stackoverflow.com/a/2450976*/
 /*Shuffle function provided by Udacity*/
 function shuffle(array) {
     let currentIndex = array.length, temporaryValue, randomIndex;
@@ -113,6 +115,7 @@ function gameOver(moves, score) {
 		allowEscapeKey: false,
         allowOutsideClick: false,
         showCancelButton: true,
+        cancelButtonColor: 'b01c2e',
 		title: 'Congratulations! You Won!',
 		text: 'It took you ' + moves + ' Moves and ' + min + ':' + sec + ' to earn ' + score + ' Stars.',
         type: 'success',
@@ -131,12 +134,12 @@ function gameOver(moves, score) {
 $restart.bind('click', function (confirmed) {
     if (confirmed) {
         $rating.removeClass('fa-star-o').addClass('fa-star');
-        resetTimer();
+        resetTimer()
         init();
     }
 });
 
-/*Main game logic*/
+/*Adds animations to cards*/
 let addCardListener = function () {
     $deck.find('.card').bind('click', function () {
         let $this = $(this);
@@ -149,18 +152,17 @@ let addCardListener = function () {
 
         if (allOpen.length > 1) {
             if (card === allOpen[0]) {
-                $deck.find('.open').addClass('match animated rubberBand');
-                setTimeout(function () {
-                    $deck.find('open').removeClass('open show animated infinite rubberBand');
-                }, wait);
+                $deck.find('.open').addClass('match animated flip');
+                setTimeout(function () {    
+                }, wait / 0.5);
                 match++;
 
                 /*If cards don't match, call animation*/
             } else {
-                $deck.find('.open').addClass('notmatch animated infinite wobble');
+                $deck.find('.open').addClass('notmatch animated shake');
                 setTimeout(function () {
-                    $deck.find('.open').removeClass('open show notmatch animated infinite wobble');
-                }, wait / 1.5);
+                    $deck.find('.open').removeClass('open show notmatch animated shake');
+                }, wait / 1.0);
             }
 
             /*Game Logic Variables*/
