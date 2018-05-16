@@ -30,12 +30,12 @@ let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'an
 
 /*Starts timer on window load and formats time*/
 let startTimer = function() {
-    setInterval(function() {
-        if (letsStop !== 1) {
-            sec++;
-        if (sec === 60) {
-            min++;
-            sec = 00;
+    timerId = setInterval(function() {
+    if (letsStop !== 1) {
+        sec++;
+    if (sec === 60) {
+        min++;
+        sec = 00;
     }
     $('.timer').html(min + ':' + sec);
     console.log(min);
@@ -55,7 +55,7 @@ let startTimer = function() {
 };
 
 /*Makes the startTimer function not run until a card is clicked*/
-$(".deck").one("click", function(){  
+$(".deck").one("click", function(){
     startTimer(); 
 });
 
@@ -112,7 +112,7 @@ function rating(moves) {
 /*Pop-up alert window, Courtesy of SweetAlert2*/
 function gameOver(moves, score) {
 	swal({
-		allowEscapeKey: false,
+	    allowEscapeKey: false,
         allowOutsideClick: false,
         showCancelButton: true,
         cancelButtonColor: 'b01c2e',
@@ -153,7 +153,7 @@ let addCardListener = function () {
         if (allOpen.length > 1) {
             if (card === allOpen[0]) {
                 $deck.find('.open').addClass('match animated flip');
-                setTimeout(function () {    
+                setTimeout(function () {
                 }, wait / 0.5);
                 match++;
 
@@ -175,6 +175,7 @@ let addCardListener = function () {
         /*Game over when all cards match*/
         if (totalCard === match) {
             rating(moves);
+            clearInterval(timerId);
             let score = rating(moves).score;
             setTimeout(function () {
                 gameOver(moves, score);
