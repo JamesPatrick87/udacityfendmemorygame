@@ -41,21 +41,21 @@ let startTimer = function() {
     console.log(min);
     console.log(sec);
     }
-    let formattedSec = "0";
+    let formattedSec = '0';
     if (sec < 10) {
         formattedSec += sec
     } else {
         formattedSec = String(sec);
     }
 
-    let time = String(min) + ":" + formattedSec;
-    $(".timer").text(time);
+    let time = String(min) + ':' + formattedSec;
+    $('.timer').text(time);
     }, 1000);
 
 };
 
 /*Makes the startTimer function not run until a card is clicked*/
-$(".deck").one("click", function(){
+$deck.one('click', function(){
     startTimer(); 
 });
 
@@ -83,10 +83,10 @@ function shuffle(array) {
 function init() {
 
     let allCards = shuffle(faces);
-    $deck.empty();
-    match = 0;
-    moves = 0;
-    $moves.text('0');
+        $deck.empty();
+        match = 0;
+        moves = 0;
+        $moves.text('0');
 
     /*Loop creates <li> tags and adds class to card array names*/
     for (let i = 0; i < allCards.length; i++) {
@@ -134,7 +134,7 @@ function gameOver(moves, score) {
 $restart.bind('click', function (confirmed) {
     if (confirmed) {
         $rating.removeClass('fa-star-o').addClass('fa-star');
-        resetTimer()
+        resetTimer();
         init();
     }
 });
@@ -165,7 +165,6 @@ let addCardListener = function () {
                 }, wait / 1.0);
             }
 
-            /*Game Logic Variables*/
             allOpen = [];
             moves++;
             rating(moves);
