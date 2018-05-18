@@ -150,7 +150,7 @@ h1 {
     margin: 0;
     padding: 0;
     display: inline-block;
-    margin: 0 5px 0 0;
+    margin: 0 4px 0 0;
     color: #daa520;
 }
 
@@ -162,10 +162,11 @@ h1 {
 .score-panel .restart {
     float: right;
     cursor: pointer;
+    padding-right: 40px;
 }
 
 .timer {
-    padding-left: 70px;
+    padding-left: 52px;
 }
 
 /*

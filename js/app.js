@@ -2,22 +2,16 @@
 let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond'],
 
     /*Simplifying Selectors*/
-    $container = $('.container'),
-    $scorePanel = $('.score-panel'),
     $rating = $('.fa-star'),
     $moves = $('.moves'),
-    $timer = $('.timer'),
     $restart = $('.restart'),
     $deck = $('.deck'),
 
     /*Variables*/
-    nowTime,
     allOpen = [],
     match = 0,
     min = 00,
     sec = 00,
-    hours = 00,
-    clearTime = -1,
     letsStop = 0,
     moves = 0,
     wait = 420,
@@ -43,7 +37,7 @@ let startTimer = function() {
     }
     let formattedSec = '0';
     if (sec < 10) {
-        formattedSec += sec
+        formattedSec += sec;
     } else {
         formattedSec = String(sec);
     }
@@ -62,7 +56,7 @@ $deck.one('click', function(){
 /*Resets Page*/
 function resetTimer() {
     window.location.reload(true);
-};
+}
 
 /*Shuffle function from http://stackoverflow.com/a/2450976*/
 /*Shuffle function provided by Udacity*/
@@ -90,7 +84,7 @@ function init() {
 
     /*Loop creates <li> tags and adds class to card array names*/
     for (let i = 0; i < allCards.length; i++) {
-        $deck.append($('<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'))
+        $deck.append($('<li class="card"><i class="fa fa-' + allCards[i] + '"></i></li>'));
     }
     addCardListener();
 }
@@ -111,7 +105,7 @@ function rating(moves) {
 
 /*Pop-up alert window, Courtesy of SweetAlert2*/
 function gameOver(moves, score) {
-	swal({
+    swal({
 	    allowEscapeKey: false,
         allowOutsideClick: false,
         showCancelButton: true,
@@ -127,7 +121,7 @@ function gameOver(moves, score) {
             resetTimer();
 			init();
         }
-	})
+	});
 }
 
 /*Binds to reset button and resets game when Functions are called*/
@@ -181,6 +175,6 @@ let addCardListener = function () {
             }, 500);
         }
     });
-}
+};
 
 init();
