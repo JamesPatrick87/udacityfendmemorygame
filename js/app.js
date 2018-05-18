@@ -1,8 +1,8 @@
 /*Card Array*/
-const faces = ['bicycle', 'leaf', 'cube', 'anchor', 'paper-plane-o', 'bolt', 'bomb', 'diamond']
-const doubleFaces = faces.concat(faces);
+let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond'],
+
     /*Simplifying Selectors*/
-let $rating = $('.fa-star'),
+    $rating = $('.fa-star'),
     $moves = $('.moves'),
     $restart = $('.restart'),
     $deck = $('.deck'),
@@ -15,12 +15,8 @@ let $rating = $('.fa-star'),
     letsStop = 0,
     moves = 0,
     wait = 420,
-    totalCard = doubleFaces.length / 2,
-
-    /*Scoring Tiers*/
-    high = 14,
-    medium = 16,
-    low = 20;
+    totalCard = faces.length / 2,
+    finalStars;
 
 /*Starts timer on window load and formats time*/
 let startTimer = function() {
@@ -76,7 +72,7 @@ function shuffle(array) {
 /*Begins game and shuffles deck when called*/
 function init() {
 
-    let allCards = shuffle(doubleFaces);
+    let allCards = shuffle(faces);
         $deck.empty();
         match = 0;
         moves = 0;
@@ -89,29 +85,37 @@ function init() {
     addCardListener();
 }
 
+    /*Scoring Tiers*/
+const high = 12,
+      medium = 17,
+      low = 20;
+
+
 /*Function that determines score*/
 function rating(moves) {
     let rating = 3;
     if (moves > high && moves < medium) {
         $rating.eq(3).removeClass('fa-star').addClass('fa-star-o');
+        finalStars = 3;
     } else if (moves > medium && moves < low) {
         $rating.eq(2).removeClass('fa-star').addClass('fa-star-o');
+        finalStars = 2;
     } else if (moves > low) {
         $rating.eq(1).removeClass('fa-star').addClass('fa-star-o');
+        finalStars = 1;
         rating = 1;
     }
-    return { score: rating };
 }
 
 /*Pop-up alert window, Courtesy of SweetAlert2*/
-function gameOver(moves, score) {
+function gameOver(moves) {
     swal({
 	    allowEscapeKey: false,
         allowOutsideClick: false,
         showCancelButton: true,
         cancelButtonColor: 'b01c2e',
 		title: 'Congratulations! You Won!',
-		text: 'It took you ' + moves + ' Moves and ' + min + ':' + sec + ' to earn ' + score + ' Stars.',
+		text: 'It took you ' + moves + ' Moves and ' + min + ':' + sec + ' to earn ' + finalStars + ' Stars.',
         type: 'success',
 		confirmButtonColor: '#02ccba',
 		confirmButtonText: 'Go again?'
@@ -121,7 +125,7 @@ function gameOver(moves, score) {
             resetTimer();
 			init();
         }
-	});
+	})
 }
 
 /*Binds to reset button and resets game when Functions are called*/
@@ -169,9 +173,8 @@ let addCardListener = function () {
         if (totalCard === match) {
             rating(moves);
             clearInterval(timerId);
-            let score = rating(moves).score;
             setTimeout(function () {
-                gameOver(moves, score);
+                gameOver(moves);
             }, 500);
         }
     });
