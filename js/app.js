@@ -1,8 +1,8 @@
 /*Card Array*/
-let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'anchor', 'paper-plane-o', 'paper-plane-o', 'bolt', 'bolt', 'bomb', 'bomb', 'diamond', 'diamond'],
-
+const faces = ['bicycle', 'leaf', 'cube', 'anchor', 'paper-plane-o', 'bolt', 'bomb', 'diamond']
+const doubleFaces = faces.concat(faces);
     /*Simplifying Selectors*/
-    $rating = $('.fa-star'),
+let $rating = $('.fa-star'),
     $moves = $('.moves'),
     $restart = $('.restart'),
     $deck = $('.deck'),
@@ -15,7 +15,7 @@ let faces = ['bicycle', 'bicycle', 'leaf', 'leaf', 'cube', 'cube', 'anchor', 'an
     letsStop = 0,
     moves = 0,
     wait = 420,
-    totalCard = faces.length / 2,
+    totalCard = doubleFaces.length / 2,
 
     /*Scoring Tiers*/
     high = 14,
@@ -76,7 +76,7 @@ function shuffle(array) {
 /*Begins game and shuffles deck when called*/
 function init() {
 
-    let allCards = shuffle(faces);
+    let allCards = shuffle(doubleFaces);
         $deck.empty();
         match = 0;
         moves = 0;
